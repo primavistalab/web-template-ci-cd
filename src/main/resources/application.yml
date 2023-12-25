@@ -1,1 +1,11 @@
+server:
+  port: ${TARGET_PORT:7000}
 
+spring:
+  application.name: web-service-ci-cd
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_DATABASE:postgres}?currentSchema=${DB_SCHEMA:web-service-ci-cd}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    type: com.zaxxer.hikari.HikariDataSource
