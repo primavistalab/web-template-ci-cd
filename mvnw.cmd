@@ -49,6 +49,8 @@ if exist "%USERPROFILE%\mavenrc_pre.bat" call "%USERPROFILE%\mavenrc_pre.bat" %*
 if exist "%USERPROFILE%\mavenrc_pre.cmd" call "%USERPROFILE%\mavenrc_pre.cmd" %*
 :skipRcPre
 
+set JAVA_HOME=C:\Program Files\Java\jdk-17
+
 @setlocal
 
 set ERROR_CODE=0
