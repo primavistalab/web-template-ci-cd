@@ -15,7 +15,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  build:  ## just a job name, few jobs will run parallel
     runs-on: ubuntu-latest
 
     services:
@@ -33,7 +33,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
-    steps:
+    steps:    # runs step by step
       - name: Checking out the repository
         uses: actions/checkout@v3
 
@@ -46,3 +46,14 @@ jobs:
 
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+
+      - name: Send telegram message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created commit:
+            Commit message: ${{ github.event.commits[0].message }}            
+            Repository: ${{ github.repository }}            
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
